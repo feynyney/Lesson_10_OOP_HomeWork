@@ -8,11 +8,6 @@ namespace Class_Client
 {
     internal class Client
     {
-
-        public static List<Client> dbClients;
-
-        private static uint index;
-
         public string Name { get; set; }
 
         public string Surname { get; set; }
@@ -23,9 +18,6 @@ namespace Class_Client
 
         static Client()
         {
-            dbClients = new List<Client>();
-
-            index = 0;
         }
 
         public Client(string Name, string Surname, string Phone, string Passport)
@@ -44,18 +36,6 @@ namespace Class_Client
                 this.Surname,
                 this.Phone,
                 this.Passport); 
-        }
-
-        public static void ClientsList()
-        {
-            Client.dbClients = new List<Client>()
-            {
-                new Client("Dima","Mak","0985257895","AB584554"),
-                new Client("Olha","Kolova","067584554","OK123123"),
-                new Client("Oleg","Ivanchenko","099554414","KJ13213213"),
-                new Client("Andrii","Ostapov","067484546","LI12313213"),
-                new Client("Alex","Baturin","033456775","CA1231233"),
-                new Client("Alina","Matveeva","025484564","EQ12315512")};
         }
     }
 }
