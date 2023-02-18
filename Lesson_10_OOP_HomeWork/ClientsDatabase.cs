@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
-using Class_Client;
+using ClassClient;
 //using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CLients_Database
+namespace ClassDatabase
 {
     internal class ClientsDatabase
     {
@@ -21,32 +21,40 @@ namespace CLients_Database
 
         public static void ReadJsonDb()
         {
+            int indexCount = 0;
+
             string clientsJsonData = File.ReadAllText("ClientsDb.json");
 
             var clients = JsonSerializer.Deserialize<List<Client>>(clientsJsonData);
-
-            //Console.WriteLine("Choose id: ");
-
-            //int choice = Convert.ToInt32(Console.ReadLine());
-
-            //Console.WriteLine(clients[choice].Name);
-
-            //clients[choice].Name = Console.ReadLine();
-
-            //Console.WriteLine(clients[choice].Name);
 
             if (clients != null)
             {
                 foreach (var client in clients)
                 {
-                    Console.WriteLine($"{client.Name} {client.Surname}");
+                    Console.WriteLine($"Id: {indexCount++} {client.GetInformation()}");
                 }
             }
-
-
         }
 
-        public static void AddClientToJson()
+        public static List<Client> ReturnClientsFromDb()
+        {
+
+            string clientsJsonData = File.ReadAllText("ClientsDb.json");
+
+            var clients = JsonSerializer.Deserialize<List<Client>>(clientsJsonData);
+
+            return clients;
+        }
+
+        //private static List<Client> GetReturnedClients()
+        //{
+        //    List<Client> clients = new List<Client>();
+
+        //    clients = ClientsDatabase.ReturnClientsFromDb();
+        //    return clients;
+        //}
+
+        public static void AddClientToJsonDb()
         {
             string clientsJsonData = File.ReadAllText("ClientsDb.json");
 

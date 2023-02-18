@@ -1,74 +1,75 @@
-﻿//using Class_Client;
-//using Class_Worker;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using ClassClient;
+using ClassWorker;
+using ClassDatabase;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.Json;
 
-//namespace Class_Consultant
-//{
-//    internal class Consultant : Worker
-//    {
-     
-//        public Consultant(string Name, string Surname, string Position) : base(Name,Surname,Position)
-//        {
+namespace ClassConsultant
+{
+    internal class Consultant : Worker
+    {
 
-//        }
+        public Consultant(string Name, string Surname, string Position) : base(Name, Surname, Position)
+        {
 
-//        public override void ReadData(Client client_to_read)
-//        {
-//            client_to_read.Passport = "######";
-//            base.ReadData(client_to_read);
-//        }
+        }
 
-//        public static void ShowClientsList()
-//        {
-//            uint index = 0;
-//            foreach (var client in Client.dbClients)
-//            {
-//                client.Passport = "#######";
-//                Console.WriteLine($"ID: {index++} {client.GetInformation()}");
-//            }
-//        }
+        public static void ShowClientsList()
+        {
+            int indexCount = 0;
 
-//        public void ChangeData()
-//        {
-//            Console.Write("\n*Only Phone number can be changed* \n Enter id to change:\n");
+            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
 
-//            int client_id = Convert.ToInt32(Console.ReadLine());
+            foreach (var client in clients)
+            {
+                client.Passport = "########";
+                Console.WriteLine($"Id: {indexCount++} {client.GetInformation()}");
+            }
+        }
 
-//            Console.WriteLine($"\nEnter new phone number for {Client.dbClients[client_id].Name} {Client.dbClients[client_id].Surname}\n");
+        public void ChangeData()
+        {
+            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
 
-//            Client.dbClients[client_id].Phone = Console.ReadLine().ToString();
+            Console.WriteLine("Choose Id to change data: ");
 
-//            while(Client.dbClients[client_id].Phone == String.Empty)
-//            {
-//                Console.WriteLine("String cannot be empty!");
-//                Client.dbClients[client_id].Phone = Console.ReadLine().ToString();
-//            }
-                
+            int choice = Convert.ToInt32(Console.ReadLine());
 
-//            Console.WriteLine("\nNumber has been changed successfuly!\n");
-//        }
+            Console.WriteLine("Only phone number can be changed! Enter new phone number: ");
 
-//        public static Consultant InitializeConsultant()
-//        {
-//            Console.WriteLine("Enter consultant`s Name: ");
+            clients[choice].Phone = Console.ReadLine();
 
-//            string Name = Console.ReadLine();
+            ApplyJsonDbChanges(clients);
+        }
 
-//            Console.WriteLine("Enter consultant`s Surname: ");
+        private static void ApplyJsonDbChanges(List<Client> clients)
+        {
+            string clientsJsonData = JsonSerializer.Serialize(clients);
 
-//            string Surname = Console.ReadLine();
+            File.WriteAllText("ClientsDb.json", clientsJsonData);
+        }
 
-//            string Position = "Consultant";
+        public static Consultant InitializeConsultant()
+        {
+            Console.WriteLine("Enter consultant`s Name: ");
 
-//            Console.WriteLine($"Welcome, {Name} {Surname} | {Position}");
+            string Name = Console.ReadLine();
 
-//            Consultant new_worker = new Consultant(Name,Surname,Position);
+            Console.WriteLine("Enter consultant`s Surname: ");
 
-//            return new_worker;
-//        }
-//    }
-//}
+            string Surname = Console.ReadLine();
+
+            string Position = "Consultant";
+
+            Console.WriteLine($"Welcome, {Name} {Surname} | {Position}");
+
+            Consultant new_worker = new Consultant(Name, Surname, Position);
+
+            return new_worker;
+        }
+    }
+}

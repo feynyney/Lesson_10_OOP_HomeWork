@@ -1,8 +1,8 @@
-﻿using Class_Client;
-//using Class_Worker;
-//using Class_Consultant;
+﻿using ClassWorker;
+using ClassConsultant;
 using System;
-using CLients_Database;
+using ClassDatabase;
+using ClassClient;
 
 
 namespace MyApp // Note: actual namespace depends on the project name.
@@ -11,9 +11,13 @@ namespace MyApp // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            ClientsDatabase.AddClientToJson();
+            //ClientsDatabase.AddClientToJsonDb();
 
-            ClientsDatabase.ReadJsonDb();
+            //ClientsDatabase.ReadJsonDb();
+
+
+
+            Worker.StartWork(Consultant.InitializeConsultant());
 
             //Worker.StartWork(Consultant.InitializeConsultant());
         }
