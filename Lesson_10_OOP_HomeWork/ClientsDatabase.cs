@@ -5,18 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using ClassClient;
-//using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 
 namespace ClassDatabase
 {
     internal class ClientsDatabase
     {
-        public static List<Client> dbClients;
 
         static ClientsDatabase()
         {
-            dbClients = new List<Client>();
+            
         }
 
         public static void ReadJsonDb()
@@ -46,15 +44,7 @@ namespace ClassDatabase
             return clients;
         }
 
-        //private static List<Client> GetReturnedClients()
-        //{
-        //    List<Client> clients = new List<Client>();
-
-        //    clients = ClientsDatabase.ReturnClientsFromDb();
-        //    return clients;
-        //}
-
-        public static void AddClientToJsonDb()
+        public static void AddClientToJsonDb()   //Function adds a new client to Json file (Not available for consultant, just a template)
         {
             string clientsJsonData = File.ReadAllText("ClientsDb.json");
 
@@ -105,22 +95,5 @@ namespace ClassDatabase
 
             return newClient;
         }
-
-        //public static async void JsonDataBase(List<Client> dbClients)
-        //{
-        //    string jsonDb = JsonConvert.SerializeObject(dbClients);
-
-        //    System.IO.File.AppendAllText("user.json", jsonDb + "\n");
-        //}
-
-        //public static void ReadJson()
-        //{
-        //    string filename = "user.json";
-        //    string read = JsonSerializer.Serialize(filename);
-        //    using (FileStream fs = new FileStream("user.json", FileMode.OpenOrCreate))
-        //    {
-        //        File.WriteAllText("user.json", read);
-        //    }
-        //}
     }
 }

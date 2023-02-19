@@ -1,81 +1,73 @@
-﻿using ClassClient;
-using ClassConsultant;
-using ClassDatabase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassClient;
+using ClassConsultant;
+using ClassDatabase;
 
 namespace ClassWorker
 {
     internal abstract class Worker
     {
-        protected string position;
+        protected private string _position;
 
         public string Name { get; set; }
 
         public string Surname { get; set; }
 
-        public string Position { get { return this.position; } }
+        public string Position { get { return this._position; } }
 
         public Worker(string name, string surname, string position)
         {
             Name = name;
             Surname = surname;
-            this.position = position;
+            this._position = position;
         }
 
         public static void StartWork(Consultant consultant)
         {
-            ConsultantWorkLogicLoop(consultant);
-        }
-
-        private static void ConsultantWorkLogicLoop(Consultant consultant)
-        {
-            bool flag = true;
-
-            while (flag)
-            {
-                flag = ConsultantWorkLogic(consultant);
-            }
-        }
-
-        private static bool ConsultantWorkLogic(Consultant consultant)
-        {
-            bool loop_flag = true;
-
-            bool clients_list_show_flag;
+            bool isWorking = true;
 
             Console.WriteLine("\n1 - Begin work\n2 - Exit\n");
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
-            switch (choice)
+            while(isWorking)
             {
-                case 1:
-                    clients_list_show_flag = GetClients();
+                switch (choice)
+                {
+                    case 1:
+                        isWorking = GetClients();
 
-                    if (clients_list_show_flag)
-                    {
-                        choice = Operations(consultant);
+                        if(isWorking)
+                        {
+                            choice = Operations(consultant);
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+
+                    case 2:
+                        isWorking = false;
                         break;
-                    }
-                    else
-                    {
-                        loop_flag = false;
-                    }
-                    break;
-                case 2:
-                    loop_flag = false;
-                    break;
+
+                    case 3:
+                        StartWork(consultant);
+                        isWorking = false;
+                        break;
+                }
             }
-            return loop_flag;
         }
+
 
         private static int Operations(Consultant consultant)
         {
             int choice;
+
             Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n");
 
             choice = Convert.ToInt32(Console.ReadLine());
@@ -87,7 +79,8 @@ namespace ClassWorker
                 case 1:
                     Console.WriteLine("\nEnter Client`s id to read data: \n");
                     client_id = Convert.ToInt32(Console.ReadLine());
-                    //consultant.ReadData(Client.dbClients[client_id]);
+                    consultant.ReadData(client_id);
+                    Operations(consultant);
                     break;
                 case 2:
                     consultant.ChangeData();
@@ -101,7 +94,7 @@ namespace ClassWorker
 
         private static bool GetClients()
         {
-            bool flag = true;
+            bool isWorkingClientsList = true;
 
             Console.WriteLine("\nShow clients list? \n 1 - Show \n 2 - Exit\n");
 
@@ -114,17 +107,17 @@ namespace ClassWorker
                     break;
 
                 case 2:
-                    flag = false;
+                    isWorkingClientsList = false;
                     break;
             }
-            return flag;
+            return isWorkingClientsList;
         }
 
-        public void ReadData()
+        public virtual void ReadData(int clientId)
         {
             List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
 
-            
+            Console.WriteLine(clients[clientId].GetInformation());
         }
     }
 }

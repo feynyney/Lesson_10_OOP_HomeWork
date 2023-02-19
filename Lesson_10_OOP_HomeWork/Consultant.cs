@@ -46,6 +46,25 @@ namespace ClassConsultant
             ApplyJsonDbChanges(clients);
         }
 
+        public override void ReadData(int clientId)
+        {
+            int idIndex = 0;
+
+            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
+
+            clients[clientId].Passport = "######";
+
+            foreach (var client in clients)
+            {
+                idIndex++;
+
+                if (idIndex == clientId)
+                {
+                    Console.WriteLine($"Id: {idIndex} {clients[clientId].GetInformation()}");
+                }
+            }
+        }
+
         private static void ApplyJsonDbChanges(List<Client> clients)
         {
             string clientsJsonData = JsonSerializer.Serialize(clients);
