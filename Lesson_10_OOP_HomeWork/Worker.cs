@@ -44,7 +44,7 @@ namespace ClassWorker
 
                         if(isWorking)
                         {
-                            choice = Operations(newWorker);
+                            Operations(newWorker);
                             break;
                         }
                         else
@@ -65,7 +65,7 @@ namespace ClassWorker
         }
 
 
-        private static int Operations(Worker newWorker)
+        private static void Operations(Worker newWorker)
         {
             int choice;
 
@@ -83,7 +83,6 @@ namespace ClassWorker
                     Console.WriteLine("\nEnter Client`s id to read data: \n");
                     client_id = Convert.ToInt32(Console.ReadLine());
                     newWorker.ReadData(client_id);
-                    Operations(newWorker);
                     break;
                 case 2:
                     newWorker.ChangeData(clients);
@@ -91,8 +90,6 @@ namespace ClassWorker
                 case 3:
                     break;
             }
-
-            return choice;
         }
 
         private static bool GetClients(Worker newWorker)

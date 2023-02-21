@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ClassConsultant;
 using ClassClient;
 using ClassDatabase;
+using ClassWorker;
 
 namespace ClassManager
 {
@@ -16,7 +17,7 @@ namespace ClassManager
 
         }
 
-        public static Consultant InitializeManager()
+        public static Manager InitializeManager()
         {
             Console.WriteLine("Enter manager`s Name: ");
 
@@ -30,9 +31,9 @@ namespace ClassManager
 
             Console.WriteLine($"Welcome, {Name} {Surname} | {Position}");
 
-            Manager new_manager= new Manager(Name, Surname, Position);
+            Manager newManager= new Manager(Name, Surname, Position);
 
-            return new_manager;
+            return newManager;
         }
 
         public override void ShowClientsList(List<Client> clients)
@@ -45,6 +46,13 @@ namespace ClassManager
             {
                 Console.WriteLine($"Id: {indexCount++} {client.GetInformation()}");
             }
+        }
+
+        public override void ReadData(int clientId)
+        {
+            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
+
+            Console.WriteLine(clients[clientId].GetInformation());
         }
 
         public override void ChangeData(List<Client> clients)

@@ -55,12 +55,12 @@ namespace ClassConsultant
 
             foreach (var client in clients)
             {
-                idIndex++;
-
                 if (idIndex == clientId)
                 {
                     Console.WriteLine($"Id: {idIndex} {clients[clientId].GetInformation()}");
                 }
+
+                idIndex++;
             }
         }
 
