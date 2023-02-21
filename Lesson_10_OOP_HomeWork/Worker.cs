@@ -96,7 +96,7 @@ namespace ClassWorker
         {
             bool isWorkingClientsList = true;
 
-            Console.WriteLine("\nShow clients list? \n 1 - Show \n 2 - Exit\n");
+            Console.WriteLine("\nShow clients list? \n 1 - Show \n 2 - Operations \n 3 - Exit\n");
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -107,6 +107,9 @@ namespace ClassWorker
                     break;
 
                 case 2:
+                    break;
+
+                case 3:
                     isWorkingClientsList = false;
                     break;
             }
