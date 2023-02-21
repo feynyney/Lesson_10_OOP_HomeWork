@@ -95,5 +95,12 @@ namespace ClassDatabase
 
             return newClient;
         }
+
+        public static void ApplyJsonDbChanges(List<Client> clients)
+        {
+            string clientsJsonData = JsonSerializer.Serialize(clients);
+
+            File.WriteAllText("ClientsDb.json", clientsJsonData);
+        }
     }
 }

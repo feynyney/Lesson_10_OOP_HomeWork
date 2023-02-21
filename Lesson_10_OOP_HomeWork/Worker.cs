@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ClassClient;
 using ClassConsultant;
 using ClassDatabase;
+using ClassManager;
 
 namespace ClassWorker
 {
@@ -26,7 +27,7 @@ namespace ClassWorker
             this._position = position;
         }
 
-        public static void StartWork(Consultant consultant)
+        public static void StartWork(Worker newWorker)
         {
             bool isWorking = true;
 
@@ -39,11 +40,11 @@ namespace ClassWorker
                 switch (choice)
                 {
                     case 1:
-                        isWorking = GetClients(consultant);
+                        isWorking = GetClients(newWorker);
 
                         if(isWorking)
                         {
-                            choice = Operations(consultant);
+                            choice = Operations(newWorker);
                             break;
                         }
                         else
@@ -56,7 +57,7 @@ namespace ClassWorker
                         break;
 
                     case 3:
-                        StartWork(consultant);
+                        StartWork(newWorker);
                         isWorking = false;
                         break;
                 }
@@ -64,9 +65,11 @@ namespace ClassWorker
         }
 
 
-        private static int Operations(Consultant consultant)
+        private static int Operations(Worker newWorker)
         {
             int choice;
+
+            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
 
             Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n");
 
@@ -79,11 +82,11 @@ namespace ClassWorker
                 case 1:
                     Console.WriteLine("\nEnter Client`s id to read data: \n");
                     client_id = Convert.ToInt32(Console.ReadLine());
-                    consultant.ReadData(client_id);
-                    Operations(consultant);
+                    newWorker.ReadData(client_id);
+                    Operations(newWorker);
                     break;
                 case 2:
-                    consultant.ChangeData();
+                    newWorker.ChangeData(clients);
                     break;
                 case 3:
                     break;
@@ -92,7 +95,7 @@ namespace ClassWorker
             return choice;
         }
 
-        private static bool GetClients(Consultant consultant)
+        private static bool GetClients(Worker newWorker)
         {
             bool isWorkingClientsList = true;
 
@@ -100,16 +103,17 @@ namespace ClassWorker
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
-            switch (choice)
+            switch(choice)
             {
                 case 1:
-                    consultant.ShowClientsList(ClientsDatabase.ReturnClientsFromDb());
+                    newWorker.ShowClientsList(ClientsDatabase.ReturnClientsFromDb());
                     break;
 
                 case 2:
                     isWorkingClientsList = false;
                     break;
             }
+
             return isWorkingClientsList;
         }
 
@@ -128,6 +132,41 @@ namespace ClassWorker
             {
                 Console.WriteLine($"Id: {indexCount++} {client.GetInformation()}");
             }
+        }
+
+        public virtual void ChangeData(List<Client> clients)
+        {
+            ClientsDatabase.ApplyJsonDbChanges(clients);
+        }
+
+        public static Worker InitializeWorker()
+        {
+            Worker newWorker = null;
+
+            Console.WriteLine("Enter your position Manager/Consultant?: ");
+
+            string position = Console.ReadLine();
+
+            switch(position)
+            {
+                case "Consultant":
+                    newWorker = Consultant.InitializeConsultant();
+                    break;
+
+                case "consultant":
+                    newWorker = Consultant.InitializeConsultant();
+                    break;
+
+                case "Manager":
+                    newWorker = Manager.InitializeManager();
+                    break;
+
+                case "manager":
+                    newWorker = Manager.InitializeManager();
+                    break;
+            }
+
+            return newWorker;
         }
     }
 }

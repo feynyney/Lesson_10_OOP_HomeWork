@@ -30,19 +30,19 @@ namespace ClassConsultant
             base.ShowClientsList(clients);
         }
 
-        public void ChangeData()
+        public override void ChangeData(List<Client> clients)
         {
-            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
+            Console.WriteLine("Only phone number can be changed! Enter new phone number: \n");
 
-            Console.WriteLine("Choose Id to change data: ");
+            Console.WriteLine("Enter Id to change: ");
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Only phone number can be changed! Enter new phone number: ");
+            Console.WriteLine("Enter new phone number: ");
 
             clients[choice].Phone = Console.ReadLine();
 
-            ApplyJsonDbChanges(clients);
+            base.ChangeData(clients);
         }
 
         public override void ReadData(int clientId)
@@ -64,13 +64,7 @@ namespace ClassConsultant
             }
         }
 
-        private static void ApplyJsonDbChanges(List<Client> clients)
-        {
-            string clientsJsonData = JsonSerializer.Serialize(clients);
-
-            File.WriteAllText("ClientsDb.json", clientsJsonData);
-        }
-
+       
         public static Consultant InitializeConsultant()
         {
             Console.WriteLine("Enter consultant`s Name: ");
