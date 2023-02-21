@@ -39,7 +39,7 @@ namespace ClassWorker
                 switch (choice)
                 {
                     case 1:
-                        isWorking = GetClients();
+                        isWorking = GetClients(consultant);
 
                         if(isWorking)
                         {
@@ -92,7 +92,7 @@ namespace ClassWorker
             return choice;
         }
 
-        private static bool GetClients()
+        private static bool GetClients(Consultant consultant)
         {
             bool isWorkingClientsList = true;
 
@@ -103,7 +103,7 @@ namespace ClassWorker
             switch (choice)
             {
                 case 1:
-                    Consultant.ShowClientsList();
+                    consultant.ShowClientsList(ClientsDatabase.ReturnClientsFromDb());
                     break;
 
                 case 2:
@@ -118,6 +118,16 @@ namespace ClassWorker
             List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
 
             Console.WriteLine(clients[clientId].GetInformation());
+        }
+
+        public virtual void ShowClientsList(List<Client> clients)
+        {
+            int indexCount = 0;
+
+            foreach (var client in clients)
+            {
+                Console.WriteLine($"Id: {indexCount++} {client.GetInformation()}");
+            }
         }
     }
 }

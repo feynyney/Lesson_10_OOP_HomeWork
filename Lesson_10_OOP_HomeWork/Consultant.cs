@@ -18,17 +18,16 @@ namespace ClassConsultant
 
         }
 
-        public static void ShowClientsList()
+        public override void ShowClientsList(List<Client> clients)
         {
-            int indexCount = 0;
-
-            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
+            clients = ClientsDatabase.ReturnClientsFromDb();
 
             foreach (var client in clients)
             {
-                client.Passport = "########";
-                Console.WriteLine($"Id: {indexCount++} {client.GetInformation()}");
+                client.Passport = "#####";
             }
+
+            base.ShowClientsList(clients);
         }
 
         public void ChangeData()
