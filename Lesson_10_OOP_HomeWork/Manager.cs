@@ -82,29 +82,43 @@ namespace ClassManager
                 case 1:
                     clients[choiceId].Name = Console.ReadLine();
 
+                    clients[choiceId].TimeOfChanges = DateTime.Now;
+
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
-                        $" Name {previousName} => {clients[choiceId].Name} \n";
+                        $" Name {previousName} => {clients[choiceId].Name} Changed: {clients[choiceId].TimeOfChanges}\n";
+
                     break;
 
                 case 2:
                     clients[choiceId].Surname = Console.ReadLine();
 
+                    clients[choiceId].TimeOfChanges = DateTime.Now;
+
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
-                        $" Surname {previousSurname} => {clients[choiceId].Surname} \n";
+                        $" Surname {previousSurname} => {clients[choiceId].Surname} Changed: {clients[choiceId].TimeOfChanges}\n";
+
+
                     break;
 
                 case 3:
                     clients[choiceId].Phone = Console.ReadLine();
 
+                    clients[choiceId].TimeOfChanges = DateTime.Now;
+
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
-                        $" Phone {previousPhone} => {clients[choiceId].Phone} \n";
+                        $" Phone {previousPhone} => {clients[choiceId].Phone} Changed: {clients[choiceId].TimeOfChanges}\n";
+
+                    clients[choiceId].TimeOfChanges = DateTime.Now;
                     break;
 
                 case 4:
                     clients[choiceId].Passport = Console.ReadLine();
 
+                    clients[choiceId].TimeOfChanges = DateTime.Now;
+
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
-                        $" Passport {previousPassport} => {clients[choiceId].Passport} \n";
+                        $" Passport {previousPassport} => {clients[choiceId].Passport} Changed: {clients[choiceId].TimeOfChanges}\n";
+
                     break;
             }
             clients[choiceId].WhoChanged = "Manager";
