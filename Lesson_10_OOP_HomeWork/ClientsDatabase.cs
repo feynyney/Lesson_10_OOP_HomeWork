@@ -36,7 +36,6 @@ namespace ClassDatabase
 
         public static List<Client> ReturnClientsFromDb()
         {
-
             string clientsJsonData = File.ReadAllText("ClientsDb.json");
 
             var clients = JsonSerializer.Deserialize<List<Client>>(clientsJsonData);

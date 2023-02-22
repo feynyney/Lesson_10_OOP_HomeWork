@@ -96,7 +96,7 @@ namespace ClassWorker
         {
             bool isWorkingClientsList = true;
 
-            Console.WriteLine("\nShow clients list? \n 1 - Show \n 2 - Operations \n 3 - Exit\n");
+            Console.WriteLine("\nShow clients list? \n 1 - Show \n 2 - Operations \n 3 - Exit\n 4 - Show changes");
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -111,6 +111,10 @@ namespace ClassWorker
 
                 case 3:
                     isWorkingClientsList = false;
+                    break;
+
+                case 4:
+                    newWorker.ShowClientsListChanges(ClientsDatabase.ReturnClientsFromDb());
                     break;
             }
 
@@ -131,6 +135,16 @@ namespace ClassWorker
             foreach (var client in clients)
             {
                 Console.WriteLine($"Id: {indexCount++} {client.GetInformation()}");
+            }
+        }
+
+        public virtual void ShowClientsListChanges(List<Client> clients)
+        {
+            int indexCount = 0;
+
+            foreach (var client in clients)
+            {
+                Console.WriteLine($"Id: {indexCount++} {client.GetInformationChanges()}");
             }
         }
 

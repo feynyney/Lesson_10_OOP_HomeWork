@@ -57,6 +57,8 @@ namespace ClassManager
 
         public override void ChangeData(List<Client> clients)
         {
+            List<string> changes = new List<string>();
+
             clients = ClientsDatabase.ReturnClientsFromDb();
 
             Console.WriteLine("Enter Id to change data: ");
@@ -67,24 +69,45 @@ namespace ClassManager
 
             int choiceOperation = Convert.ToInt32(Console.ReadLine());
 
-            switch(choiceOperation)
+            string previousName = clients[choiceId].Name;
+
+            string previousSurname = clients[choiceId].Surname;
+
+            string previousPhone = clients[choiceId].Phone;
+
+            string previousPassport = clients[choiceId].Passport;
+
+            switch (choiceOperation)
             {
                 case 1:
                     clients[choiceId].Name = Console.ReadLine();
+
+                    clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
+                        $" Name {previousName} => {clients[choiceId].Name} \n";
                     break;
 
                 case 2:
                     clients[choiceId].Surname = Console.ReadLine();
+
+                    clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
+                        $" Surname {previousSurname} => {clients[choiceId].Surname} \n";
                     break;
 
                 case 3:
                     clients[choiceId].Phone = Console.ReadLine();
+
+                    clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
+                        $" Phone {previousPhone} => {clients[choiceId].Phone} \n";
                     break;
 
                 case 4:
                     clients[choiceId].Passport = Console.ReadLine();
+
+                    clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
+                        $" Passport {previousPassport} => {clients[choiceId].Passport} \n";
                     break;
             }
+            clients[choiceId].WhoChanged = "Manager";
 
             ClientsDatabase.ApplyJsonDbChanges(clients);
         }

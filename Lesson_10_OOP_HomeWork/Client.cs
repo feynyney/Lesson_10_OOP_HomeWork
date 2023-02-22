@@ -16,6 +16,12 @@ namespace ClassClient
 
         public string Passport { get; set; }
 
+        public DateTime TimeOfChanges { get; set; }
+
+        public string WhatDataChanged { get; set; }
+
+        public string WhoChanged { get; set; }
+
         static Client()
         {
         }
@@ -31,11 +37,24 @@ namespace ClassClient
 
         public string GetInformation()
         {
-            return String.Format("Name:{0,10} | Surname:{1,15} | Phone:{2,12} | Passport:{3,10}",
+            return String.Format("Name:{0,10} |" +
+                " Surname:{1,15} |" +
+                " Phone:{2,12} |" +
+                " Passport:{3,10} |",
                 this.Name,
                 this.Surname,
                 this.Phone,
                 this.Passport); 
+        }
+
+        public string GetInformationChanges()
+        {
+            return String.Format("\nData of changes:{0,10}\n |" +
+                " What changed:{1,15}\n |" +
+                " Who changed:{2,12}\n |\n",
+                this.TimeOfChanges,
+                this.WhatDataChanged,
+                this.WhoChanged);
         }
     }
 }
