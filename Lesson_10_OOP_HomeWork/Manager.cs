@@ -48,6 +48,16 @@ namespace ClassManager
             }
         }
 
+        public override void ShowClientsListChanges(List<Client> clients)
+        {
+            int indexCount = 0;
+
+            foreach (var client in clients)
+            {
+                Console.WriteLine($"Id: {indexCount++} {client.GetInformationChanges()}");
+            }
+        }
+
         public override void ReadData(int clientId)
         {
             List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
@@ -57,8 +67,6 @@ namespace ClassManager
 
         public override void ChangeData(List<Client> clients)
         {
-            List<string> changes = new List<string>();
-
             clients = ClientsDatabase.ReturnClientsFromDb();
 
             Console.WriteLine("Enter Id to change data: ");
@@ -68,14 +76,10 @@ namespace ClassManager
             Console.WriteLine("Change: \n 1 - Name \n 2 - Surname \n 3 - Phone \n 4 - Passport");
 
             int choiceOperation = Convert.ToInt32(Console.ReadLine());
+            string previousName, previousSurname, previousPhone, previousPassport;
+            PreviousData(clients, choiceId, out previousName, out previousSurname, out previousPhone, out previousPassport);
 
-            string previousName = clients[choiceId].Name;
-
-            string previousSurname = clients[choiceId].Surname;
-
-            string previousPhone = clients[choiceId].Phone;
-
-            string previousPassport = clients[choiceId].Passport;
+            clients[choiceId].WhoChanged = "Manager";
 
             switch (choiceOperation)
             {
@@ -85,7 +89,9 @@ namespace ClassManager
                     clients[choiceId].TimeOfChanges = DateTime.Now;
 
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
-                        $" Name {previousName} => {clients[choiceId].Name} Changed: {clients[choiceId].TimeOfChanges}\n";
+                        $" Name {previousName} => {clients[choiceId].Name} " +
+                        $"Changed: {clients[choiceId].TimeOfChanges} " +
+                        $"By {clients[choiceId].WhoChanged}\n";
 
                     break;
 
@@ -95,7 +101,9 @@ namespace ClassManager
                     clients[choiceId].TimeOfChanges = DateTime.Now;
 
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
-                        $" Surname {previousSurname} => {clients[choiceId].Surname} Changed: {clients[choiceId].TimeOfChanges}\n";
+                        $" Surname {previousSurname} => {clients[choiceId].Surname} " +
+                        $"Changed: {clients[choiceId].TimeOfChanges}\n" +
+                        $"By {clients[choiceId].WhoChanged}\n";
 
 
                     break;
@@ -106,7 +114,9 @@ namespace ClassManager
                     clients[choiceId].TimeOfChanges = DateTime.Now;
 
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
-                        $" Phone {previousPhone} => {clients[choiceId].Phone} Changed: {clients[choiceId].TimeOfChanges}\n";
+                        $" Phone {previousPhone} => {clients[choiceId].Phone} " +
+                        $"Changed: {clients[choiceId].TimeOfChanges}\n" +
+                        $"By {clients[choiceId].WhoChanged}\n";
 
                     clients[choiceId].TimeOfChanges = DateTime.Now;
                     break;
@@ -117,13 +127,22 @@ namespace ClassManager
                     clients[choiceId].TimeOfChanges = DateTime.Now;
 
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
-                        $" Passport {previousPassport} => {clients[choiceId].Passport} Changed: {clients[choiceId].TimeOfChanges}\n";
+                        $" Passport {previousPassport} => {clients[choiceId].Passport} " +
+                        $"Changed: {clients[choiceId].TimeOfChanges} " +
+                        $"By {clients[choiceId].WhoChanged}\n";
 
                     break;
             }
-            clients[choiceId].WhoChanged = "Manager";
 
             ClientsDatabase.ApplyJsonDbChanges(clients);
+        }
+
+        public static void PreviousData(List<Client> clients, int choiceId, out string previousName, out string previousSurname, out string previousPhone, out string previousPassport)
+        {
+            previousName = clients[choiceId].Name;
+            previousSurname = clients[choiceId].Surname;
+            previousPhone = clients[choiceId].Phone;
+            previousPassport = clients[choiceId].Passport;
         }
     }
 }

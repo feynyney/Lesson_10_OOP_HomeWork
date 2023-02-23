@@ -52,11 +52,9 @@ namespace ClassClient
         public string GetInformationChanges()
         {
             return String.Format("\nData of adding:{0,10}\n |" +
-                " What changed:{1,15}\n |" +
-                " Who changed:{2,12}\n |\n",
+                " What changed:{1,15}\n |",
                 this.DateOfAdding,
-                this.WhatDataChanged,
-                this.WhoChanged);
+                this.WhatDataChanged);
         }
     }
 }
