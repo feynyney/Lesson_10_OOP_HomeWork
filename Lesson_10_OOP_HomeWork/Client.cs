@@ -22,6 +22,8 @@ namespace ClassClient
 
         public string WhoChanged { get; set; }
 
+        public DateTime DateOfAdding { get; set; }
+
         static Client()
         {
         }
@@ -49,10 +51,10 @@ namespace ClassClient
 
         public string GetInformationChanges()
         {
-            return String.Format("\nData of changes:{0,10}\n |" +
+            return String.Format("\nData of adding:{0,10}\n |" +
                 " What changed:{1,15}\n |" +
                 " Who changed:{2,12}\n |\n",
-                this.TimeOfChanges,
+                this.DateOfAdding,
                 this.WhatDataChanged,
                 this.WhoChanged);
         }

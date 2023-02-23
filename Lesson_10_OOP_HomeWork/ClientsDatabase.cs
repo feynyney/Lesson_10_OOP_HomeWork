@@ -51,6 +51,8 @@ namespace ClassDatabase
 
             Client newClient = ClientCreation();
 
+            newClient.DateOfAdding = DateTime.Now;
+
             if (clientsJsonData != String.Empty)
             {
                 clients = JsonSerializer.Deserialize<List<Client>>(clientsJsonData);
