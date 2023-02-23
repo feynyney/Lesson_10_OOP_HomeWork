@@ -37,6 +37,15 @@ namespace ClassManager
             return newManager;
         }
 
+
+
+        public static IManager InterfaceManagerInit(Manager manager)
+        {
+            IManager newManagerInterface = manager;
+
+            return newManagerInterface;
+        }
+
         public override void ShowClientsList(List<Client> clients)
         {
             int indexCount = 0;
@@ -66,7 +75,7 @@ namespace ClassManager
             Console.WriteLine(clients[clientId].GetInformation());
         }
 
-        public void ChangeData(List<Client> clients)
+        public override void ChangeData(List<Client> clients)
         {
             clients = ClientsDatabase.ReturnClientsFromDb();
 
