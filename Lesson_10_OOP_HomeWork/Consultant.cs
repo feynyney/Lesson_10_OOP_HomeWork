@@ -2,6 +2,7 @@
 using ClassWorker;
 using ClassDatabase;
 using ClassManager;
+using InterfaceConsultant;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Text.RegularExpressions;
 
 namespace ClassConsultant
 {
-    internal class Consultant : Worker
+    internal class Consultant : Worker, IConsultant
     {
 
         public Consultant(string Name, string Surname, string Position) : base(Name, Surname, Position)

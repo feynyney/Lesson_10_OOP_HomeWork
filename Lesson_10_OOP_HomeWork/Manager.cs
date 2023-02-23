@@ -7,10 +7,11 @@ using ClassConsultant;
 using ClassClient;
 using ClassDatabase;
 using ClassWorker;
+using InterfaceManager;
 
 namespace ClassManager
 {
-    internal class Manager : Consultant
+    internal class Manager : Consultant, IManager
     {
         public Manager(string Name, string Surname, string Position) : base(Name, Surname, Position)
         {
@@ -65,7 +66,7 @@ namespace ClassManager
             Console.WriteLine(clients[clientId].GetInformation());
         }
 
-        public override void ChangeData(List<Client> clients)
+        public void ChangeData(List<Client> clients)
         {
             clients = ClientsDatabase.ReturnClientsFromDb();
 
