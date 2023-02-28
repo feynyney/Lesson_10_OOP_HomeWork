@@ -4,7 +4,7 @@ using ClassManager;
 using System;
 using ClassDatabase;
 using ClassClient;
-
+using WorkerInterface;
 
 namespace MyApp // Note: actual namespace depends on the project name.
 {

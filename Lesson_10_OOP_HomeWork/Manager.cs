@@ -7,11 +7,11 @@ using ClassConsultant;
 using ClassClient;
 using ClassDatabase;
 using ClassWorker;
-using InterfaceManager;
+using WorkerInterface;
 
 namespace ClassManager
 {
-    internal class Manager : Consultant, IManager
+    internal class Manager : Consultant, IWorker
     {
         public Manager(string Name, string Surname, string Position) : base(Name, Surname, Position)
         {
@@ -35,15 +35,6 @@ namespace ClassManager
             Manager newManager= new Manager(Name, Surname, Position);
 
             return newManager;
-        }
-
-
-
-        public static IManager InterfaceManagerInit(Manager manager)
-        {
-            IManager newManagerInterface = manager;
-
-            return newManagerInterface;
         }
 
         public override void ShowClientsList(List<Client> clients)

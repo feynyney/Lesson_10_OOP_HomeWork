@@ -7,6 +7,7 @@ using ClassClient;
 using ClassConsultant;
 using ClassDatabase;
 using ClassManager;
+using WorkerInterface;
 
 namespace ClassWorker
 {
@@ -27,7 +28,7 @@ namespace ClassWorker
             this._position = position;
         }
 
-        public static void StartWork(Worker newWorker)
+        public static void StartWork(IWorker newWorker)
         {
             bool isWorking = true;
 
@@ -65,7 +66,7 @@ namespace ClassWorker
         }
 
 
-        private static void Operations(Worker newWorker)
+        private static void Operations(IWorker newWorker)
         {
             int choice;
 
@@ -92,7 +93,7 @@ namespace ClassWorker
             }
         }
 
-        private static bool GetClients(Worker newWorker)
+        private static bool GetClients(IWorker newWorker)
         {
             bool isWorkingClientsList = true;
 
@@ -153,9 +154,9 @@ namespace ClassWorker
             ClientsDatabase.ApplyJsonDbChanges(clients);
         }
 
-        public static Worker InitializeWorker()
+        public static IWorker InitializeWorker()
         {
-            Worker newWorker = null;
+            IWorker newWorker = null;
 
             Console.WriteLine("Enter your position Manager/Consultant?: ");
 
