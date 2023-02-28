@@ -77,7 +77,7 @@ namespace ClassWorker
                 Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n");
             }
             
-            if(newWorker is Manager)
+            else if(newWorker is Manager)
             {
                 Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n 4 - Add new client \n");
             }
@@ -201,6 +201,21 @@ namespace ClassWorker
             }
 
             return newWorker;
+        }
+
+        public static string EnterWhileStringEmpty(string stringToEnter)
+        {
+            while (stringToEnter == String.Empty)
+            {
+                Console.WriteLine("String cannot be empty!");
+
+                stringToEnter = Console.ReadLine();
+
+                if (stringToEnter != String.Empty)
+                    break;
+            }
+
+            return stringToEnter;
         }
     }
 }

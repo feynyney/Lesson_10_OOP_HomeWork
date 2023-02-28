@@ -24,9 +24,13 @@ namespace ClassManager
 
             string Name = Console.ReadLine();
 
+            Name = EnterWhileStringEmpty(Name);
+
             Console.WriteLine("Enter manager`s Surname: ");
 
             string Surname = Console.ReadLine();
+
+            Surname = EnterWhileStringEmpty(Surname);
 
             string Position = "Manager";
 
@@ -87,6 +91,8 @@ namespace ClassManager
                 case 1:
                     clients[choiceId].Name = Console.ReadLine();
 
+                    clients[choiceId].Name = EnterWhileStringEmpty(clients[choiceId].Name);
+
                     clients[choiceId].TimeOfChanges = DateTime.Now;
 
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
@@ -98,6 +104,8 @@ namespace ClassManager
 
                 case 2:
                     clients[choiceId].Surname = Console.ReadLine();
+
+                    clients[choiceId].Surname = EnterWhileStringEmpty(clients[choiceId].Surname);
 
                     clients[choiceId].TimeOfChanges = DateTime.Now;
 
@@ -112,6 +120,8 @@ namespace ClassManager
                 case 3:
                     clients[choiceId].Phone = Console.ReadLine();
 
+                    clients[choiceId].Phone = EnterWhileStringEmpty(clients[choiceId].Phone);
+
                     clients[choiceId].TimeOfChanges = DateTime.Now;
 
                     clients[choiceId].WhatDataChanged = clients[choiceId].WhatDataChanged + "\n" +
@@ -124,6 +134,8 @@ namespace ClassManager
 
                 case 4:
                     clients[choiceId].Passport = Console.ReadLine();
+
+                    clients[choiceId].Passport = EnterWhileStringEmpty(clients[choiceId].Passport);
 
                     clients[choiceId].TimeOfChanges = DateTime.Now;
 

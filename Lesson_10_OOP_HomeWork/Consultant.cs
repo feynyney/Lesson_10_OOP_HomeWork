@@ -69,6 +69,8 @@ namespace ClassConsultant
 
             clients[choiceId].Phone = Console.ReadLine();
 
+            clients[choiceId].Phone = EnterWhileStringEmpty(clients[choiceId].Phone);
+
             clients[choiceId].WhoChanged = "Consultant";
 
             clients[choiceId].TimeOfChanges = DateTime.Now;
