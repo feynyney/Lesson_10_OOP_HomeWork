@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using ClassClient;
-
+using ClassWorker;
 
 namespace ClassDatabase
 {
@@ -80,17 +80,25 @@ namespace ClassDatabase
             
             string name = Console.ReadLine();
 
+            name = Worker.EnterWhileStringEmpty(name);
+
             Console.WriteLine("Enter client`s surname: ");
 
             string surname = Console.ReadLine();
+
+            surname = Worker.EnterWhileStringEmpty(surname);
 
             Console.WriteLine("Enter client`s phone number: ");
 
             string phone = Console.ReadLine();
 
+            phone = Worker.EnterWhileStringEmpty(phone);
+
             Console.WriteLine("Enter client`s passport data: ");
 
             string passport = Console.ReadLine();
+
+            passport = Worker.EnterWhileStringEmpty(passport);
 
             Client newClient = new Client(name, surname, phone, passport);
 

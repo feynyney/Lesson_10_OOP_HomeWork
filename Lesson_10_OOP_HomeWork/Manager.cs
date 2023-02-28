@@ -22,21 +22,21 @@ namespace ClassManager
         {
             Console.WriteLine("Enter manager`s Name: ");
 
-            string Name = Console.ReadLine();
+            string name = Console.ReadLine();
 
-            Name = EnterWhileStringEmpty(Name);
+            name = EnterWhileStringEmpty(name);
 
             Console.WriteLine("Enter manager`s Surname: ");
 
-            string Surname = Console.ReadLine();
+            string surname = Console.ReadLine();
 
-            Surname = EnterWhileStringEmpty(Surname);
+            surname = EnterWhileStringEmpty(surname);
 
-            string Position = "Manager";
+            string position = "Manager";
 
-            Console.WriteLine($"Welcome, {Name} {Surname} | {Position}");
+            Console.WriteLine($"Welcome, {name} {surname} | {position}");
 
-            Manager newManager= new Manager(Name, Surname, Position);
+            Manager newManager= new Manager(name, surname, position);
 
             return newManager;
         }

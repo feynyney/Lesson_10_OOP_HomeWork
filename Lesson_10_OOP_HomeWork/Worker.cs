@@ -61,6 +61,12 @@ namespace ClassWorker
                         StartWork(newWorker);
                         isWorking = false;
                         break;
+
+                    default:
+                        Console.WriteLine("Follow menu!");
+                        isWorking = false;
+                        StartWork(newWorker);
+                        break;
                 }
             }
         }
@@ -68,19 +74,19 @@ namespace ClassWorker
 
         private static void Operations(IWorker newWorker)
         {
-            int choice;
-
-            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
-
-            if(newWorker is Consultant)
-            {
-                Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n");
-            }
-            
-            else if(newWorker is Manager)
+            if (newWorker is Manager)
             {
                 Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n 4 - Add new client \n");
             }
+
+            else if (newWorker is Consultant)
+            {
+                Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n");
+            }
+
+            int choice;
+
+            List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
 
             choice = Convert.ToInt32(Console.ReadLine());
 
@@ -93,11 +99,14 @@ namespace ClassWorker
                     client_id = Convert.ToInt32(Console.ReadLine());
                     newWorker.ReadData(client_id);
                     break;
+
                 case 2:
                     newWorker.ChangeData(clients);
                     break;
+
                 case 3:
                     break;
+
                 case 4:
                     if(newWorker is Manager)
                     {
@@ -108,6 +117,10 @@ namespace ClassWorker
                     {
                         break;
                     }
+                    break;
+
+                default:
+                    Console.WriteLine("Follow menu!");
                     break;
             }
         }
@@ -135,6 +148,11 @@ namespace ClassWorker
 
                 case 4:
                     newWorker.ShowClientsListChanges(ClientsDatabase.ReturnClientsFromDb());
+                    break;
+
+                default:
+                    Console.WriteLine("Follow menu!");
+                    GetClients(newWorker);
                     break;
             }
 
@@ -197,6 +215,11 @@ namespace ClassWorker
 
                 case "manager":
                     newWorker = Manager.InitializeManager();
+                    break;
+
+                default:
+                    Console.WriteLine("\n***Wrong position, check whether the word is written right and try again!***\n");
+                    InitializeWorker();
                     break;
             }
 

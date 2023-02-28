@@ -107,17 +107,21 @@ namespace ClassConsultant
         {
             Console.WriteLine("Enter consultant`s Name: ");
 
-            string Name = Console.ReadLine();
+            string name = Console.ReadLine();
+
+            name = Worker.EnterWhileStringEmpty(name);
 
             Console.WriteLine("Enter consultant`s Surname: ");
 
-            string Surname = Console.ReadLine();
+            string surname = Console.ReadLine();
 
-            string Position = "Consultant";
+            surname = Worker.EnterWhileStringEmpty(surname);
 
-            Console.WriteLine($"Welcome, {Name} {Surname} | {Position}");
+            string position = "Consultant";
 
-            Consultant new_worker = new Consultant(Name, Surname, Position);
+            Console.WriteLine($"Welcome, {name} {surname} | {position}");
+
+            Consultant new_worker = new Consultant(name, surname, position);
 
             return new_worker;
         }
