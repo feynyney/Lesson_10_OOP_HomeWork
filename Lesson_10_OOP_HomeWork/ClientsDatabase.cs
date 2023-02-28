@@ -21,7 +21,7 @@ namespace ClassDatabase
         {
             int indexCount = 0;
 
-            string clientsJsonData = File.ReadAllText("ClientsDb.json");
+            string clientsJsonData = File.ReadAllText(@"..\..\..\ClientsDb.json");
 
             var clients = JsonSerializer.Deserialize<List<Client>>(clientsJsonData);
 
@@ -36,7 +36,7 @@ namespace ClassDatabase
 
         public static List<Client> ReturnClientsFromDb()
         {
-            string clientsJsonData = File.ReadAllText("ClientsDb.json");
+            string clientsJsonData = File.ReadAllText(@"..\..\..\ClientsDb.json");
 
             var clients = JsonSerializer.Deserialize<List<Client>>(clientsJsonData);
 
