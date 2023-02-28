@@ -72,7 +72,15 @@ namespace ClassWorker
 
             List<Client> clients = ClientsDatabase.ReturnClientsFromDb();
 
-            Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n");
+            if(newWorker is Consultant)
+            {
+                Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n");
+            }
+            
+            if(newWorker is Manager)
+            {
+                Console.WriteLine("\nOperation to do: \n 1 - Read data \n 2 - Change data \n 3 - Back\n 4 - Add new client \n");
+            }
 
             choice = Convert.ToInt32(Console.ReadLine());
 
@@ -89,6 +97,17 @@ namespace ClassWorker
                     newWorker.ChangeData(clients);
                     break;
                 case 3:
+                    break;
+                case 4:
+                    if(newWorker is Manager)
+                    {
+                        newWorker.AddClientToJsonDb();
+                        Console.WriteLine("New client has been added!");
+                    }
+                    else
+                    {
+                        break;
+                    }
                     break;
             }
         }

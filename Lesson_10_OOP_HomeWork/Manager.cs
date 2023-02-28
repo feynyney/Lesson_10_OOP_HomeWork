@@ -138,6 +138,11 @@ namespace ClassManager
             ClientsDatabase.ApplyJsonDbChanges(clients);
         }
 
+        public void AddClientToJsonDb()
+        {
+            ClientsDatabase.AddClientToJsonDb();
+        }
+
         public static void PreviousData(List<Client> clients, int choiceId, out string previousName, out string previousSurname, out string previousPhone, out string previousPassport)
         {
             previousName = clients[choiceId].Name;

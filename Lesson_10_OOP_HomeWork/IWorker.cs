@@ -28,5 +28,10 @@ namespace WorkerInterface
         {
             
         }
+
+        void AddClientToJsonDb()   
+        {
+         
+        }
     }
 }
